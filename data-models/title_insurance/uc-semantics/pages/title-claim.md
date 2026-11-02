@@ -11,13 +11,15 @@ source_ids:
   - GDRIVE-005
   - GDRIVE-006
 related_assets:
-  - ${catalog}.claim.claim
-  - ${catalog}.claim.claim_coverage_decision
+  - ${catalog}.ti_claim.title_claim
+  - ${catalog}.ti_claim.coverage_decision
 ---
 
 # Title Claim
 
 A title claim is a demand for coverage or performance under a title policy. It can concern an alleged defect, adverse interest, lien, fraud, boundary issue, access issue, instrument, or other covered matter.
+
+A claim is a post-policy coverage matter, not the property's chain of title. The ownership history can be evidence relevant to a claim, but the claim records notice, coverage evaluation, defense, loss, reserve, payment, and recovery activity.
 
 ## Business Rules
 

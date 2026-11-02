@@ -11,14 +11,16 @@ source_ids:
   - GDRIVE-002
   - GDRIVE-006
 related_assets:
-  - ${catalog}.underwriting.title_commitment
-  - ${catalog}.underwriting.commitment_requirement
-  - ${catalog}.underwriting.commitment_exception
+  - ${catalog}.ti_underwriting.title_commitment
+  - ${catalog}.ti_underwriting.title_requirement
+  - ${catalog}.ti_underwriting.policy_exception
 ---
 
 # Title Commitment
 
 A title commitment is a conditional offer to issue title insurance after stated requirements are satisfied and subject to stated exceptions. It identifies proposed insured parties, the proposed insured estate or interest, proposed policy amounts, requirements, and exceptions.
+
+A commitment is an underwriting output, not an ownership-history record. It can describe the estate or interest derived from examination of the chain of title, but it does not represent the chronological succession of owners or instruments.
 
 ## Business Rules
 

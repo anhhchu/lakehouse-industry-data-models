@@ -11,13 +11,15 @@ source_ids:
   - GDRIVE-002
   - GDRIVE-006
 related_assets:
-  - ${catalog}.title_order.title_order
-  - ${catalog}.title_order.title_order_status_history
+  - ${catalog}.ti_operations.title_order
+  - ${catalog}.ti_operations.order_status_history
 ---
 
 # Title Order
 
 A title order is a request for title, settlement, recording, or related services for a real-estate transaction. It is the coordinating business record for requested products, property, parcels, participants, service channel, due dates, assignments, and operational milestones.
+
+An order is a service-request and workflow record, not evidence of ownership and not part of the chain of title. It identifies the transaction and work to perform; ownership history is modeled separately through ownership interests and recorded instruments.
 
 ## Business Rules
 

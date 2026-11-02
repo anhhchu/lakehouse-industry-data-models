@@ -12,13 +12,15 @@ source_ids:
   - GDRIVE-003
   - GDRIVE-006
 related_assets:
-  - ${catalog}.title_evidence.title_examination
-  - ${catalog}.title_evidence.title_finding
+  - ${catalog}.ti_operations.operations_title_examination
+  - ${catalog}.ti_underwriting.title_finding
 ---
 
 # Title Examination
 
 Title examination is the professional evaluation of title evidence and apparent title condition. It interprets search results and produces evidence-backed findings, requirements, proposed exceptions, or underwriting referrals.
+
+An examination is an analytical work product, not the chain of title itself. The chain records ownership succession; the examination evaluates that history and other evidence as of a defined scope, effective date, and version.
 
 ## Business Rules
 

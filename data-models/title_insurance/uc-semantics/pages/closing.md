@@ -9,8 +9,8 @@ synonyms:
 source_ids:
   - GDRIVE-004
 related_assets:
-  - ${catalog}.settlement.closing
-  - ${catalog}.settlement.settlement_statement
+  - ${catalog}.ti_settlement.closing_order
+  - ${catalog}.ti_settlement.settlement_statement
 ---
 
 # Closing

@@ -11,9 +11,9 @@ source_ids:
   - GDRIVE-002
   - GDRIVE-003
 related_assets:
-  - ${catalog}.property.property
-  - ${catalog}.property.parcel
-  - ${catalog}.property.legal_description
+  - ${catalog}.ti_property.property
+  - ${catalog}.ti_property.parcel
+  - ${catalog}.ti_property.legal_description
 ---
 
 # Property and Parcel

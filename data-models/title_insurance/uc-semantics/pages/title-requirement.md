@@ -11,13 +11,15 @@ source_ids:
   - GDRIVE-003
   - GDRIVE-006
 related_assets:
-  - ${catalog}.title_evidence.title_requirement
-  - ${catalog}.title_evidence.title_finding
+  - ${catalog}.ti_underwriting.title_requirement
+  - ${catalog}.ti_underwriting.title_finding
 ---
 
 # Title Requirement
 
 A title requirement is a condition that must be satisfied, waived, withdrawn, superseded, or otherwise dispositioned before closing or policy issuance.
+
+A requirement is a remediable underwriting or closing condition, not an ownership-history record. It can arise from a gap or defect found in the chain of title, but it tracks the condition, responsible party, disposition, and satisfaction evidence.
 
 ## Business Rules
 

@@ -11,8 +11,8 @@ source_ids:
   - GDRIVE-002
   - GDRIVE-004
 related_assets:
-  - ${catalog}.recording.recording_package
-  - ${catalog}.recording.recording_submission
+  - ${catalog}.ti_recording.submission_document
+  - ${catalog}.ti_recording.recording_submission
 ---
 
 # Recording Submission

@@ -11,8 +11,8 @@ source_ids:
   - GDRIVE-003
   - GDRIVE-006
 related_assets:
-  - ${catalog}.policy.policy_exception
-  - ${catalog}.underwriting.commitment_exception
+  - ${catalog}.ti_underwriting.policy_exception
+  - ${catalog}.ti_underwriting.title_commitment
 ---
 
 # Policy Exception

@@ -12,8 +12,8 @@ source_ids:
   - GDRIVE-006
   - GDRIVE-007
 related_assets:
-  - ${catalog}.escrow.escrow_ledger_entry
-  - ${catalog}.escrow.escrow_reconciliation
+  - ${catalog}.ti_settlement.escrow_ledger
+  - ${catalog}.ti_settlement.escrow_reconciliation
 ---
 
 # Escrow Ledger

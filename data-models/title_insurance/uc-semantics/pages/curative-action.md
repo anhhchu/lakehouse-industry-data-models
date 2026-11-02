@@ -11,8 +11,8 @@ source_ids:
   - GDRIVE-003
   - GDRIVE-006
 related_assets:
-  - ${catalog}.title_evidence.curative_action
-  - ${catalog}.title_evidence.title_finding
+  - ${catalog}.ti_underwriting.curative_action
+  - ${catalog}.ti_underwriting.title_finding
 ---
 
 # Curative Action

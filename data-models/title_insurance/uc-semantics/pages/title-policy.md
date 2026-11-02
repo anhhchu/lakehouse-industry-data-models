@@ -10,13 +10,15 @@ source_ids:
   - GDRIVE-005
   - GDRIVE-006
 related_assets:
-  - ${catalog}.policy.title_policy
-  - ${catalog}.policy.policy_endorsement
+  - ${catalog}.ti_underwriting.title_policy
+  - ${catalog}.ti_underwriting.endorsement
 ---
 
 # Title Policy
 
 A title policy is an issued contract of title insurance covering an identified insured estate or interest subject to its terms, conditions, exceptions, and endorsements.
+
+A policy is an insurance contract, not the chain of title. It insures specified risks affecting an estate or interest as of its effective date; it does not establish or replace the chronological ownership history supporting that interest.
 
 ## Business Rules
 

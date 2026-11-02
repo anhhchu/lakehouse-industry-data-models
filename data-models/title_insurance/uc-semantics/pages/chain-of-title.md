@@ -11,13 +11,15 @@ source_ids:
   - GDRIVE-003
   - GDRIVE-006
 related_assets:
-  - ${catalog}.title_evidence.ownership_interest
-  - ${catalog}.title_evidence.recorded_instrument
+  - ${catalog}.ti_property.ownership_interest
+  - ${catalog}.ti_recording.recorded_instrument
 ---
 
 # Chain of Title
 
 Chain of title is the chronological sequence of ownership interests affecting a property or parcel, as supported by recorded instruments and other approved evidence.
+
+It is an ownership-history concept, not a title workflow record. A chain of title is not a title order, examination, requirement, commitment, policy, or claim; those records may analyze, reference, insure, or dispute the ownership history without becoming part of the chain itself.
 
 ## Business Rules
 
