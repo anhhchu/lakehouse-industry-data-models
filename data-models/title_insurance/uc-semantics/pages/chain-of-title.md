@@ -6,7 +6,6 @@ topic: property_and_party
 owner: ${title_operations_owner}
 synonyms:
   - ownership history
-  - title chain
 source_ids:
   - GDRIVE-003
   - GDRIVE-006
