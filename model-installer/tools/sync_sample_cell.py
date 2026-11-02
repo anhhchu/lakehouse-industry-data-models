@@ -62,6 +62,8 @@ LOG_ADD = '''    log("Metric views  : %s" % cfg["include_metrics"])
 # the same region, so "already wired" is detected by this sentinel rather than by an
 # exact match on the whole block, which any neighbouring edit would defeat.
 INSTALL_SENTINEL = "summary = generate_sample_data("
+UNSCOPED_SAMPLE_CALL = '''                    spark, cfg["sample"], cfg.get("target_catalogs") or [cfg["catalog"]], log)'''
+SCOPED_SAMPLE_CALL = '''                    spark, cfg["sample"], installed_schemas(cfg, plan), log)'''
 
 INSTALL_ANCHOR = '''        plan = build_plan(cfg)
         final, elapsed, timings = install(cfg, plan)
@@ -79,7 +81,7 @@ INSTALL_ADD = '''        plan = build_plan(cfg)
             else:
                 t_samples = time.time()
                 summary = generate_sample_data(
-                    spark, cfg["sample"], cfg.get("target_catalogs") or [cfg["catalog"]], log)
+                    spark, cfg["sample"], installed_schemas(cfg, plan), log)
                 timings["samples"] = time.time() - t_samples
                 sample_note = (" | samples: %d rows in %d tables"
                                % (summary["written"], summary["tables"]))
@@ -179,6 +181,9 @@ def main():
         report.append("  = generate_sample_data call site (already applied)")
     else:
         src = apply_edit(src, INSTALL_ANCHOR, INSTALL_ADD, "generate_sample_data call site", report)
+    if UNSCOPED_SAMPLE_CALL in src:
+        src = src.replace(UNSCOPED_SAMPLE_CALL, SCOPED_SAMPLE_CALL)
+        report.append("  ~ sample call scoped to installed schemas")
     for anchor, replacement in RESULT_EDITS:
         src = apply_edit(src, anchor, replacement, "result string", report)
     cells[main_cell]["source"] = src

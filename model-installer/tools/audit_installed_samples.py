@@ -45,14 +45,16 @@ def main():
     ap.add_argument("--profile", default="my-uae")
     ap.add_argument("--warehouse", default="0ece1cdc84e98661")
     ap.add_argument("--expect-rows", type=int, default=None)
+    ap.add_argument("--schema-prefix", default=None)
     args = ap.parse_args()
     cat, prof, wh = args.catalog, args.profile, args.warehouse
     skip = ", ".join("'%s'" % s for s in INTERNAL)
 
+    schema_filter = " AND table_schema LIKE '%s%%'" % args.schema_prefix if args.schema_prefix else ""
     tables = [(r[0], r[1]) for r in run_sql(
         "SELECT table_schema, table_name FROM %s.information_schema.tables "
         "WHERE table_schema NOT IN (%s) AND table_type = 'MANAGED' "
-        "ORDER BY 1, 2" % (cat, skip), prof, wh)]
+        "%s ORDER BY 1, 2" % (cat, skip, schema_filter), prof, wh)]
     print("tables: %d" % len(tables))
 
     # One pass for every table's row count, so this is a single statement rather than
@@ -79,7 +81,7 @@ def main():
         "  ON k.constraint_name = c.constraint_name "
         " AND k.table_schema = c.table_schema AND k.table_name = c.table_name "
         "WHERE c.constraint_type = 'PRIMARY KEY' AND k.table_schema NOT IN (%s) "
-        "ORDER BY 1, 2, 4" % (cat, cat, skip), prof, wh)
+        "%s ORDER BY 1, 2, 4" % (cat, cat, skip, schema_filter.replace("table_schema", "k.table_schema")), prof, wh)
     pks = {}
     for schema, table, column, _pos in pk_rows:
         pks.setdefault((schema, table), []).append(column)
@@ -113,7 +115,7 @@ def main():
         " AND pk.constraint_name = rc.unique_constraint_name "
         " AND pk.ordinal_position = ck.ordinal_position "
         "WHERE ck.table_schema NOT IN (%s) "
-        "ORDER BY 1, 2, 6" % (cat, cat, cat, skip), prof, wh)
+        "%s ORDER BY 1, 2, 6" % (cat, cat, cat, skip, schema_filter.replace("table_schema", "ck.table_schema")), prof, wh)
     fks = {}
     for cschema, name, cs, ct, col, _pos, ps, pt, pcol in fk_rows:
         fk = fks.setdefault((cschema, name), {"child": (cs, ct), "parent": (ps, pt),

@@ -1,0 +1,90 @@
+version: 1
+knowledge_source: google_drive
+google_drive_folder: ${google_drive_demo_folder_url}
+content_classification: synthetic_demo
+
+sources:
+  - id: GDRIVE-001
+    file: company-overview.md
+    drive_url: ${google_drive_company_overview_url}
+    owner_role: business_strategy
+    authority: contextual
+    covers:
+      - operating_model
+      - service_channels
+      - geographic_scope
+
+  - id: GDRIVE-002
+    file: title-order-process.md
+    drive_url: ${google_drive_title_order_process_url}
+    owner_role: title_operations
+    authority: authoritative
+    covers:
+      - title_order_lifecycle
+      - search_and_examination
+      - commitment_lifecycle
+      - recording
+
+  - id: GDRIVE-003
+    file: title-examination-policy.md
+    drive_url: ${google_drive_title_examination_policy_url}
+    owner_role: underwriting
+    authority: authoritative
+    covers:
+      - title_evidence
+      - finding_classification
+      - curative_requirements
+      - underwriting_decisions
+
+  - id: GDRIVE-004
+    file: closing-escrow-procedure.md
+    drive_url: ${google_drive_closing_escrow_procedure_url}
+    owner_role: settlement_operations
+    authority: authoritative
+    covers:
+      - closing
+      - escrow_ledger
+      - disbursement
+      - recording_package
+
+  - id: GDRIVE-005
+    file: policy-and-claims-guide.md
+    drive_url: ${google_drive_policy_and_claims_guide_url}
+    owner_role: policy_and_claims
+    authority: authoritative
+    covers:
+      - policy_issuance
+      - endorsements
+      - agency_reporting
+      - claims
+
+  - id: GDRIVE-006
+    file: business-glossary.csv
+    drive_url: ${google_drive_business_glossary_url}
+    owner_role: data_governance
+    authority: authoritative
+    covers:
+      - definitions
+      - synonyms
+      - prohibited_conflations
+
+  - id: GDRIVE-007
+    file: kpi-definitions.yml
+    drive_url: ${google_drive_kpi_definitions_url}
+    owner_role: analytics
+    authority: proposed
+    covers:
+      - metric_definitions
+      - metric_grains
+      - exclusions
+
+  - id: GDRIVE-008
+    file: source-systems.csv
+    drive_url: ${google_drive_source_systems_url}
+    owner_role: enterprise_architecture
+    authority: contextual
+    covers:
+      - systems_of_record
+      - data_ownership
+      - integration_scope
+

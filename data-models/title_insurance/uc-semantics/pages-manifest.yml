@@ -1,0 +1,136 @@
+version: 1
+status: draft
+import_method: genie_code_bulk_import
+
+pages:
+  - file: pages/title-order.md
+    title: Title Order
+    domain: insurance
+    subdomain: title_insurance
+    topic: title_operations
+    source_ids: [GDRIVE-002, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_operations.title_order
+      - ${catalog}.ti_operations.order_status_history
+
+  - file: pages/chain-of-title.md
+    title: Chain of Title
+    domain: insurance
+    subdomain: title_insurance
+    topic: property_and_party
+    source_ids: [GDRIVE-003, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_property.ownership_interest
+      - ${catalog}.ti_recording.recorded_instrument
+
+  - file: pages/title-requirement.md
+    title: Title Requirement
+    domain: insurance
+    subdomain: title_insurance
+    topic: title_operations
+    source_ids: [GDRIVE-003, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_underwriting.title_requirement
+      - ${catalog}.ti_underwriting.title_finding
+
+  - file: pages/policy-exception.md
+    title: Policy Exception
+    domain: insurance
+    subdomain: title_insurance
+    topic: underwriting_and_policy
+    source_ids: [GDRIVE-003, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_underwriting.policy_exception
+      - ${catalog}.ti_underwriting.title_commitment
+
+  - file: pages/title-commitment.md
+    title: Title Commitment
+    domain: insurance
+    subdomain: title_insurance
+    topic: underwriting_and_policy
+    source_ids: [GDRIVE-002, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_underwriting.title_commitment
+      - ${catalog}.ti_underwriting.title_requirement
+      - ${catalog}.ti_underwriting.policy_exception
+
+  - file: pages/escrow-ledger.md
+    title: Escrow Ledger
+    domain: insurance
+    subdomain: title_insurance
+    topic: settlement_and_escrow
+    source_ids: [GDRIVE-004, GDRIVE-006, GDRIVE-007]
+    related_asset_patterns:
+      - ${catalog}.ti_settlement.escrow_ledger
+      - ${catalog}.ti_settlement.escrow_reconciliation
+
+  - file: pages/property-and-parcel.md
+    title: Property and Parcel
+    domain: insurance
+    subdomain: title_insurance
+    topic: property_and_party
+    source_ids: [GDRIVE-002, GDRIVE-003]
+    related_asset_patterns:
+      - ${catalog}.ti_property.property
+      - ${catalog}.ti_property.parcel
+      - ${catalog}.ti_property.legal_description
+
+  - file: pages/title-examination.md
+    title: Title Examination
+    domain: insurance
+    subdomain: title_insurance
+    topic: title_operations
+    source_ids: [GDRIVE-002, GDRIVE-003, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_operations.operations_title_examination
+      - ${catalog}.ti_underwriting.title_finding
+
+  - file: pages/curative-action.md
+    title: Curative Action
+    domain: insurance
+    subdomain: title_insurance
+    topic: title_operations
+    source_ids: [GDRIVE-003, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_underwriting.curative_action
+      - ${catalog}.ti_underwriting.title_finding
+
+  - file: pages/closing.md
+    title: Closing
+    domain: insurance
+    subdomain: title_insurance
+    topic: settlement_and_escrow
+    source_ids: [GDRIVE-004]
+    related_asset_patterns:
+      - ${catalog}.ti_settlement.closing_order
+      - ${catalog}.ti_settlement.settlement_statement
+
+  - file: pages/recording-submission.md
+    title: Recording Submission
+    domain: insurance
+    subdomain: title_insurance
+    topic: recording
+    source_ids: [GDRIVE-002, GDRIVE-004]
+    related_asset_patterns:
+      - ${catalog}.ti_recording.submission_document
+      - ${catalog}.ti_recording.recording_submission
+
+  - file: pages/title-policy.md
+    title: Title Policy
+    domain: insurance
+    subdomain: title_insurance
+    topic: underwriting_and_policy
+    source_ids: [GDRIVE-005, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_underwriting.title_policy
+      - ${catalog}.ti_underwriting.endorsement
+
+  - file: pages/title-claim.md
+    title: Title Claim
+    domain: insurance
+    subdomain: title_insurance
+    topic: claims
+    source_ids: [GDRIVE-005, GDRIVE-006]
+    related_asset_patterns:
+      - ${catalog}.ti_claim.title_claim
+      - ${catalog}.ti_claim.coverage_decision

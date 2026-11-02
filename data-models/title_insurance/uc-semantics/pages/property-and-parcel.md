@@ -1,0 +1,29 @@
+---
+title: Property and Parcel
+domain: insurance
+subdomain: title_insurance
+topic: property_and_party
+owner: ${data_governance_owner}
+synonyms:
+  - real property
+  - tax parcel
+source_ids:
+  - GDRIVE-002
+  - GDRIVE-003
+related_assets:
+  - ${catalog}.property.property
+  - ${catalog}.property.parcel
+  - ${catalog}.property.legal_description
+---
+
+# Property and Parcel
+
+A property is the real-estate subject of an order, closing, instrument, policy, or claim. A parcel is a jurisdictionally identified tract or unit associated with a property. They are related but not interchangeable.
+
+## Business Rules
+
+- One property can contain multiple parcels.
+- A parcel can participate in multiple transactions over time.
+- Street address, parcel identifier, and legal description are distinct identifiers.
+- Preserve source identifiers and resolution history across title plants, assessors, and order systems.
+- Do not treat an address match alone as proof that two property records are identical.

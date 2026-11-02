@@ -1,0 +1,105 @@
+{
+  "run_name": "title_insurance_native_spark_repair",
+  "timeout_seconds": 7200,
+  "performance_target": "STANDARD",
+  "tasks": [
+    {
+      "task_key": "operations__title_order",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.title_order"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "underwriting__title_policy",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.title_policy"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "recording__recording_submission",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.recording_submission"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "recording__rejection_event",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.rejection_event"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__title_claim",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.title_claim"
+        }
+      },
+      "environment_key": "default"
+    }
+  ],
+  "environments": [
+    {
+      "environment_key": "default",
+      "spec": {
+        "environment_version": "4",
+        "dependencies": []
+      }
+    }
+  ]
+}

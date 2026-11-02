@@ -1,0 +1,488 @@
+version: 1
+status: draft
+model_scope: title_insurance
+content_classification: synthetic_demo
+
+principles:
+  - id: ONT-PRN-001
+    statement: Model business meaning independently from source-system structure.
+  - id: ONT-PRN-002
+    statement: Preserve material lifecycle history and revisions.
+  - id: ONT-PRN-003
+    statement: Retain evidence and provenance for title conclusions and underwriting decisions.
+  - id: ONT-PRN-004
+    statement: Represent roles contextually rather than as mutually exclusive party types.
+  - id: ONT-PRN-005
+    statement: Keep legally and operationally distinct concepts separate even when local terminology overlaps.
+
+concepts:
+  - name: title_order
+    label: Title Order
+    domain: title_order
+    definition: A request for title, settlement, recording, or related services for a real-estate transaction.
+    synonyms: [order, title file]
+    distinct_from: [title_commitment, title_policy]
+    source_ids: [GDRIVE-002, GDRIVE-006]
+
+  - name: property
+    label: Property
+    domain: property
+    definition: The real property that is the subject of an order, evidence record, closing, or policy.
+    synonyms: [real property, premises]
+    distinct_from: [parcel, legal_description]
+    source_ids: [GDRIVE-001, GDRIVE-002]
+
+  - name: parcel
+    label: Parcel
+    domain: property
+    definition: A jurisdictionally identified tract or unit of land associated with a property.
+    synonyms: [tax parcel, assessor parcel]
+    distinct_from: [property, legal_description]
+    source_ids: [GDRIVE-002]
+
+  - name: legal_description
+    label: Legal Description
+    domain: property
+    definition: A legally recognized textual or mapped description of land or an interest in land.
+    synonyms: [property legal description]
+    distinct_from: [street_address, parcel_identifier]
+    source_ids: [GDRIVE-002, GDRIVE-003]
+
+  - name: party
+    label: Party
+    domain: party
+    definition: A person, organization, public authority, or other participant with a contextual role.
+    synonyms: [participant]
+    distinct_from: [party_role]
+    source_ids: [GDRIVE-001, GDRIVE-008]
+
+  - name: party_role
+    label: Party Role
+    domain: party
+    definition: A time-bounded role held by a party in a defined business context.
+    synonyms: [participant role]
+    distinct_from: [party_type]
+    source_ids: [GDRIVE-001, GDRIVE-002]
+
+  - name: recorded_instrument
+    label: Recorded Instrument
+    domain: title_evidence
+    definition: A document accepted into a recording jurisdiction's official records.
+    synonyms: [recorded document, instrument]
+    distinct_from: [title_finding, evidence_record]
+    source_ids: [GDRIVE-003, GDRIVE-006]
+
+  - name: ownership_interest
+    label: Ownership Interest
+    domain: title_evidence
+    definition: A time-bounded estate, right, or interest held or alleged to be held by a party in property.
+    synonyms: [title interest, ownership claim]
+    distinct_from: [current_owner, party_role]
+    source_ids: [GDRIVE-003]
+
+  - name: title_search
+    label: Title Search
+    domain: title_evidence
+    definition: The process and resulting collection of evidence from defined public and approved sources.
+    synonyms: [search, search package]
+    distinct_from: [title_examination]
+    source_ids: [GDRIVE-002, GDRIVE-006]
+
+  - name: title_examination
+    label: Title Examination
+    domain: title_evidence
+    definition: Professional evaluation of evidence and the apparent condition of title.
+    synonyms: [examination, exam]
+    distinct_from: [title_search]
+    source_ids: [GDRIVE-003, GDRIVE-006]
+
+  - name: title_finding
+    label: Title Finding
+    domain: title_evidence
+    definition: An examiner conclusion about title condition supported by one or more evidence records.
+    synonyms: [finding]
+    distinct_from: [recorded_instrument, requirement, exception]
+    source_ids: [GDRIVE-003, GDRIVE-006]
+
+  - name: title_requirement
+    label: Title Requirement
+    domain: title_evidence
+    definition: A condition to be satisfied, waived, withdrawn, or otherwise dispositioned before closing or issuance.
+    synonyms: [requirement, condition]
+    distinct_from: [policy_exception]
+    source_ids: [GDRIVE-003, GDRIVE-006]
+
+  - name: policy_exception
+    label: Policy Exception
+    domain: policy
+    definition: A matter excluded from proposed or issued title-insurance coverage.
+    synonyms: [exception, exclusion]
+    distinct_from: [title_requirement]
+    source_ids: [GDRIVE-003, GDRIVE-006]
+
+  - name: curative_action
+    label: Curative Action
+    domain: title_evidence
+    definition: An action intended to resolve, mitigate, or document a title finding or requirement.
+    synonyms: [curative work, cure]
+    distinct_from: [underwriting_decision]
+    source_ids: [GDRIVE-003, GDRIVE-006]
+
+  - name: underwriting_decision
+    label: Underwriting Decision
+    domain: underwriting
+    definition: A documented coverage or risk decision made under an identified authority level.
+    synonyms: [underwriting approval, referral decision]
+    distinct_from: [curative_action, requirement_disposition]
+    source_ids: [GDRIVE-003]
+
+  - name: title_commitment
+    label: Title Commitment
+    domain: underwriting
+    definition: A conditional offer to issue title insurance after stated requirements are satisfied and subject to stated exceptions.
+    synonyms: [commitment, preliminary report]
+    distinct_from: [title_policy, title_search]
+    source_ids: [GDRIVE-002, GDRIVE-006]
+
+  - name: closing
+    label: Closing
+    domain: settlement
+    definition: The coordinated completion of documents, approvals, funding, signing, disbursement, and recording readiness.
+    synonyms: [settlement]
+    distinct_from: [title_order, recording_submission]
+    source_ids: [GDRIVE-004]
+
+  - name: settlement_statement
+    label: Settlement Statement
+    domain: settlement
+    definition: A versioned presentation of transaction charges, credits, prorations, and funds due.
+    synonyms: [closing statement]
+    distinct_from: [escrow_ledger]
+    source_ids: [GDRIVE-004, GDRIVE-006]
+
+  - name: escrow_ledger
+    label: Escrow Ledger
+    domain: escrow
+    definition: The accounting record of actual escrow receipts, disbursements, adjustments, and balances.
+    synonyms: [trust ledger]
+    distinct_from: [settlement_statement]
+    source_ids: [GDRIVE-004, GDRIVE-006]
+
+  - name: recording_package
+    label: Recording Package
+    domain: recording
+    definition: A set of documents prepared and submitted together for recording.
+    synonyms: [recording submission package]
+    distinct_from: [recorded_instrument]
+    source_ids: [GDRIVE-004, GDRIVE-006]
+
+  - name: recording_submission
+    label: Recording Submission
+    domain: recording
+    definition: An attempt to submit a recording package or document to a recording jurisdiction.
+    synonyms: [submission attempt]
+    distinct_from: [recording_package, recorded_instrument]
+    source_ids: [GDRIVE-002, GDRIVE-004]
+
+  - name: title_policy
+    label: Title Policy
+    domain: policy
+    definition: An issued contract of title insurance covering an identified insured interest subject to terms and exceptions.
+    synonyms: [policy]
+    distinct_from: [title_commitment]
+    source_ids: [GDRIVE-005, GDRIVE-006]
+
+  - name: policy_endorsement
+    label: Policy Endorsement
+    domain: policy
+    definition: A form that modifies or clarifies coverage under a title policy.
+    synonyms: [endorsement]
+    distinct_from: [policy_exception]
+    source_ids: [GDRIVE-005, GDRIVE-006]
+
+  - name: agency_remittance
+    label: Agency Remittance
+    domain: agency
+    definition: An agent's report and transfer of premium, taxes, and fees net of authorized retention.
+    synonyms: [agent remittance]
+    distinct_from: [policy_premium, commission]
+    source_ids: [GDRIVE-001, GDRIVE-005]
+
+  - name: title_claim
+    label: Title Claim
+    domain: claim
+    definition: A demand for coverage or performance under a title policy.
+    synonyms: [claim, notice of claim]
+    distinct_from: [title_finding]
+    source_ids: [GDRIVE-005, GDRIVE-006]
+
+relationships:
+  - name: concerns_property
+    subject: title_order
+    object: property
+    cardinality: many_to_many
+    required: true
+    source_ids: [GDRIVE-002]
+
+  - name: contains_parcel
+    subject: property
+    object: parcel
+    cardinality: one_to_many
+    required: false
+    source_ids: [GDRIVE-002]
+
+  - name: participates_as
+    subject: party
+    object: party_role
+    cardinality: one_to_many
+    required: false
+    source_ids: [GDRIVE-001, GDRIVE-002]
+
+  - name: affects_parcel
+    subject: recorded_instrument
+    object: parcel
+    cardinality: many_to_many
+    required: false
+    source_ids: [GDRIVE-002, GDRIVE-003]
+
+  - name: supports_interest
+    subject: recorded_instrument
+    object: ownership_interest
+    cardinality: many_to_many
+    required: false
+    source_ids: [GDRIVE-003]
+
+  - name: collects_evidence
+    subject: title_search
+    object: recorded_instrument
+    cardinality: many_to_many
+    required: false
+    source_ids: [GDRIVE-002, GDRIVE-003]
+
+  - name: evaluates_search
+    subject: title_examination
+    object: title_search
+    cardinality: many_to_one
+    required: true
+    source_ids: [GDRIVE-002, GDRIVE-003]
+
+  - name: produces_finding
+    subject: title_examination
+    object: title_finding
+    cardinality: one_to_many
+    required: false
+    source_ids: [GDRIVE-003]
+
+  - name: supported_by
+    subject: title_finding
+    object: recorded_instrument
+    cardinality: many_to_many
+    required: true
+    source_ids: [GDRIVE-003]
+
+  - name: produces_requirement
+    subject: title_finding
+    object: title_requirement
+    cardinality: one_to_many
+    required: false
+    source_ids: [GDRIVE-003]
+
+  - name: produces_exception
+    subject: title_finding
+    object: policy_exception
+    cardinality: one_to_many
+    required: false
+    source_ids: [GDRIVE-003]
+
+  - name: addresses_finding
+    subject: curative_action
+    object: title_finding
+    cardinality: many_to_many
+    required: true
+    source_ids: [GDRIVE-003]
+
+  - name: results_from_order
+    subject: title_commitment
+    object: title_order
+    cardinality: many_to_one
+    required: true
+    source_ids: [GDRIVE-002]
+
+  - name: lists_requirement
+    subject: title_commitment
+    object: title_requirement
+    cardinality: many_to_many
+    required: false
+    source_ids: [GDRIVE-002, GDRIVE-003]
+
+  - name: lists_exception
+    subject: title_commitment
+    object: policy_exception
+    cardinality: many_to_many
+    required: false
+    source_ids: [GDRIVE-002, GDRIVE-003]
+
+  - name: presents_statement
+    subject: closing
+    object: settlement_statement
+    cardinality: one_to_many
+    required: true
+    source_ids: [GDRIVE-004]
+
+  - name: accounted_by
+    subject: closing
+    object: escrow_ledger
+    cardinality: one_to_one
+    required: false
+    source_ids: [GDRIVE-004]
+
+  - name: submits_package
+    subject: closing
+    object: recording_package
+    cardinality: one_to_many
+    required: false
+    source_ids: [GDRIVE-004]
+
+  - name: attempts_recording
+    subject: recording_submission
+    object: recording_package
+    cardinality: many_to_one
+    required: true
+    source_ids: [GDRIVE-004]
+
+  - name: originates_from_order
+    subject: title_policy
+    object: title_order
+    cardinality: many_to_one
+    required: true
+    source_ids: [GDRIVE-005]
+
+  - name: follows_commitment
+    subject: title_policy
+    object: title_commitment
+    cardinality: many_to_one
+    required: false
+    source_ids: [GDRIVE-002, GDRIVE-005]
+
+  - name: modifies_policy
+    subject: policy_endorsement
+    object: title_policy
+    cardinality: many_to_one
+    required: true
+    source_ids: [GDRIVE-005]
+
+  - name: reports_policy
+    subject: agency_remittance
+    object: title_policy
+    cardinality: many_to_many
+    required: false
+    source_ids: [GDRIVE-005]
+
+  - name: made_against
+    subject: title_claim
+    object: title_policy
+    cardinality: many_to_one
+    required: true
+    source_ids: [GDRIVE-005]
+
+invariants:
+  - id: ONT-INV-001
+    rule: Every title policy references an originating title order.
+    severity: critical
+    source_ids: [GDRIVE-005]
+    validation: title_policy.title_order_id is not null
+
+  - id: ONT-INV-002
+    rule: Owner and lender policies remain separate policy records and policy types.
+    severity: critical
+    source_ids: [GDRIVE-005]
+    validation: policy_type in ('owner', 'lender') and no record represents both types
+
+  - id: ONT-INV-003
+    rule: A title requirement and a policy exception are never represented by the same entity.
+    severity: critical
+    source_ids: [GDRIVE-003, GDRIVE-006]
+    validation: separate entities and identifiers exist for title_requirement and policy_exception
+
+  - id: ONT-INV-004
+    rule: Settlement-statement lines and escrow-ledger entries remain separate records.
+    severity: critical
+    source_ids: [GDRIVE-004, GDRIVE-006]
+    validation: separate entities exist and reconciliation does not infer ledger activity from statement lines
+
+  - id: ONT-INV-005
+    rule: Material lifecycle state changes are append-only and effective-dated.
+    severity: high
+    source_ids: [GDRIVE-002, GDRIVE-003, GDRIVE-005]
+    validation: lifecycle entities include effective timestamp and prior states are retained
+
+  - id: ONT-INV-006
+    rule: Every material title finding cites at least one evidence record.
+    severity: critical
+    source_ids: [GDRIVE-003]
+    validation: no material title_finding lacks a finding_evidence relationship
+
+  - id: ONT-INV-007
+    rule: Document execution, effective, submission, acceptance, and recording dates are distinct attributes.
+    severity: high
+    source_ids: [GDRIVE-002, GDRIVE-003, GDRIVE-004]
+    validation: date attributes are modeled independently and not aliased to one physical column
+
+  - id: ONT-INV-008
+    rule: Escrow receipts minus disbursements minus remaining balance equals zero after approved adjustments for a closed accounting period.
+    severity: critical
+    source_ids: [GDRIVE-004, GDRIVE-007]
+    validation: escrow reconciliation metric equals zero or produces a controlled exception
+
+  - id: ONT-INV-009
+    rule: Restricted bank, wire, identity, signature, tax, and non-public personal data carries restricted classification.
+    severity: critical
+    source_ids: [GDRIVE-004]
+    validation: governed classification tags exist on all identified sensitive attributes
+
+  - id: ONT-INV-010
+    rule: A party can hold multiple simultaneous contextual roles.
+    severity: high
+    source_ids: [GDRIVE-001, GDRIVE-002]
+    validation: party_role is a separate many-valued effective-dated entity
+
+competency_questions:
+  - id: CQ-001
+    question: Which unresolved requirements are delaying scheduled closings?
+    concepts: [title_requirement, closing, title_order]
+  - id: CQ-002
+    question: Which evidence supports a title finding and its resulting requirement or exception?
+    concepts: [recorded_instrument, title_finding, title_requirement, policy_exception]
+  - id: CQ-003
+    question: What is the ownership-interest history for a parcel as of a specified date?
+    concepts: [parcel, ownership_interest, recorded_instrument]
+  - id: CQ-004
+    question: Which recording packages were rejected and later accepted after correction?
+    concepts: [recording_package, recording_submission, recorded_instrument]
+  - id: CQ-005
+    question: Which escrow files are out of balance and how long have differences remained unresolved?
+    concepts: [closing, escrow_ledger]
+  - id: CQ-006
+    question: Which claims relate to defects previously identified during examination or underwriting?
+    concepts: [title_claim, title_policy, title_finding, underwriting_decision]
+
+classification_requirements:
+  - classification: restricted
+    concepts:
+      - wire_instruction
+      - bank_account
+      - identity_document
+      - signature
+      - tax_identifier
+      - non_public_personal_information
+    source_ids: [GDRIVE-004]
+
+review:
+  required_roles:
+    - title_operations
+    - settlement_operations
+    - underwriting
+    - policy_administration
+    - claims
+    - data_governance
+  status: pending

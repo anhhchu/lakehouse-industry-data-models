@@ -108,18 +108,26 @@ def _rows_of(result):
     return [tuple(r) for r in result.collect()]
 
 
-def _sample_read_catalog(spark, catalog, entities):
-    """Add every base table of one catalog (columns + PK + FK) into `entities`."""
+def _sample_read_catalog(spark, catalog, entities, schemas=None):
+    """Add base tables from the requested schemas of one catalog into `entities`."""
     skip = ", ".join("'%s'" % s for s in SAMPLE_INTERNAL_SCHEMAS)
+    schema_filter = ""
+    if schemas is not None:
+        allowed = sorted(set(str(schema) for schema in schemas
+                             if str(schema) not in SAMPLE_INTERNAL_SCHEMAS))
+        if not allowed:
+            return
+        quoted = ", ".join("'%s'" % schema.replace("'", "''") for schema in allowed)
+        schema_filter = " AND c.table_schema IN (%s)" % quoted
     col_rows = _rows_of(spark.sql("""
         SELECT c.table_schema, c.table_name, c.column_name, c.full_data_type,
                c.is_nullable, c.ordinal_position
         FROM `%s`.information_schema.columns c
         JOIN `%s`.information_schema.tables t
           ON t.table_schema = c.table_schema AND t.table_name = c.table_name
-        WHERE c.table_schema NOT IN (%s) AND t.table_type <> 'VIEW'
+        WHERE c.table_schema NOT IN (%s) AND t.table_type <> 'VIEW'%s
         ORDER BY c.table_schema, c.table_name, c.ordinal_position
-    """ % (catalog, catalog, skip)))
+    """ % (catalog, catalog, skip, schema_filter)))
     for schema, table, column, dtype, nullable, position in col_rows:
         key = "%s.%s.%s" % (catalog, schema, table)
         ent = entities.get(key)
@@ -138,9 +146,9 @@ def _sample_read_catalog(spark, catalog, entities):
         JOIN `%s`.information_schema.key_column_usage k
           ON tc.constraint_schema = k.constraint_schema
          AND tc.constraint_name = k.constraint_name
-        WHERE tc.constraint_type = 'PRIMARY KEY'
+        WHERE tc.constraint_type = 'PRIMARY KEY'%s
         ORDER BY k.table_schema, k.table_name, k.ordinal_position
-    """ % (catalog, catalog)))
+    """ % (catalog, catalog, schema_filter.replace("c.table_schema", "k.table_schema"))))
     for schema, table, column, _pos in pk_rows:
         ent = entities.get("%s.%s.%s" % (catalog, schema, table))
         if ent is not None and column not in ent.pk:
@@ -168,8 +176,10 @@ def _sample_read_catalog(spark, catalog, entities):
          AND pk.constraint_schema = rc.unique_constraint_schema
          AND pk.constraint_name = rc.unique_constraint_name
          AND pk.ordinal_position = ck.ordinal_position
+        WHERE 1=1%s
         ORDER BY rc.constraint_schema, rc.constraint_name, ck.ordinal_position
-    """ % (catalog, catalog, catalog)))
+    """ % (catalog, catalog, catalog,
+             schema_filter.replace(" AND c.table_schema", " AND ck.table_schema"))))
     grouped = {}
     for (cschema, cname, schema, table, column, _pos,
          pcat, pschema, ptable, pcolumn) in fk_rows:
@@ -185,12 +195,22 @@ def _sample_read_catalog(spark, catalog, entities):
             ent.fks.append(slot)
 
 
-def read_installed_model(spark, catalogs, log=None):
-    """Read every installed base table across the target catalogs."""
+def read_installed_model(spark, targets, log=None):
+    """Read installed base tables from exact ``(catalog, schema)`` targets.
+
+    Catalog-name strings remain supported for older callers and mean all non-internal
+    schemas. Production installs always pass exact pairs from their install plan.
+    """
     entities = {}
-    for catalog in catalogs:
+    by_catalog = {}
+    for target in targets:
+        if isinstance(target, (tuple, list)) and len(target) == 2:
+            by_catalog.setdefault(target[0], set()).add(target[1])
+        else:
+            by_catalog[str(target)] = None
+    for catalog, schemas in by_catalog.items():
         try:
-            _sample_read_catalog(spark, catalog, entities)
+            _sample_read_catalog(spark, catalog, entities, schemas)
         except Exception as err:
             if log:
                 log("  sample: could not read catalog `%s` (%s)" % (catalog, str(err)[:160]))
@@ -266,7 +286,10 @@ def _coerce(value, dtype):
     if family == "decimal":
         precision, scale = _decimal_precision(dtype)
         quant = decimal.Decimal(1).scaleb(-scale)
-        coerced = decimal.Decimal(str(value)).quantize(quant, rounding=decimal.ROUND_HALF_UP)
+        with decimal.localcontext() as context:
+            context.prec = max(precision, 38) + 2
+            coerced = decimal.Decimal(str(value)).quantize(
+                quant, rounding=decimal.ROUND_HALF_UP)
         # A DECIMAL(p,s) holds at most (p - s) integer digits. LLM value pools do not pass
         # through numeric_range's type_ceiling clamp, so an out-of-range magnitude (e.g.
         # 1234567.89 for DECIMAL(6,2)) reaches here and Spark rejects the whole write on
@@ -1206,13 +1229,15 @@ def _llm_pools_for_model(spark, cfg, populate, rows, log):
 # entry point
 # --------------------------------------------------------------------------------------
 
-def generate_sample_data(spark, cfg, catalogs, log):
-    """Populate every installed table. Returns a summary dict."""
+def generate_sample_data(spark, cfg, targets, log):
+    """Populate installed tables in the exact target schemas. Returns a summary dict."""
     rows = cfg["rows"]
     seed = cfg["seed"]
     log("=" * 64)
-    log("SAMPLE DATA: %d row(s) per table across %s" % (rows, ", ".join(catalogs)))
-    entities = read_installed_model(spark, catalogs, log)
+    labels = ["%s.%s" % tuple(t) if isinstance(t, (tuple, list)) else str(t)
+              for t in targets]
+    log("SAMPLE DATA: %d row(s) per table across %s" % (rows, ", ".join(labels)))
+    entities = read_installed_model(spark, targets, log)
     populate = dict((k, e) for k, e in entities.items() if e.columns)
     if not populate:
         log("  sample: no installed tables found - nothing to populate")

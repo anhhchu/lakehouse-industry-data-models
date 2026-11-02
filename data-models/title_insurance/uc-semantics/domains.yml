@@ -1,0 +1,65 @@
+version: 3
+status: draft
+feature: unity_catalog_semantics
+content_classification: synthetic_demo
+
+workspace_binding:
+  profile: DEFAULT
+  workspace_url: https://fevm-serverless-stable-dvmvgw.cloud.databricks.com
+
+existing_parent_domain:
+  domain_id: 67536dad-1b1d-4703-82ba-a16ff4910fdd
+  tag_key: Insurance
+  display_name: Insurance
+  managed_by_this_project: false
+
+title_insurance_subdomain:
+  domain_id: fc05a63b-5d24-4e93-80cd-d492b1b7a226
+  parent_domain_id: 67536dad-1b1d-4703-82ba-a16ff4910fdd
+  tag_key: Insurance/Title Insurance
+  display_name: Title Insurance
+  subtitle: Title, settlement, escrow, policy, agency, and claims data
+  description: Governed business concepts and assets supporting the title-insurance lifecycle from order intake and title evidence through closing, recording, policy issuance, agency oversight, and claims.
+  icon:
+    name: SHIELD_CHECKERED
+    color: "#1B5E20"
+  technical_owner_ids:
+    - 2917128087014142
+  business_owner_ids:
+    - 2917128087014142
+  effective_draft: true
+  managed_by_this_project: true
+
+discover_sections:
+  - key: title_operations
+    title: Title Operations
+    subtitle: Orders, search, examination, and curative work
+    description: Title-order intake, public-record research, evidence collection, examination, findings, requirements, exceptions, and curative processing.
+  - key: property_and_party
+    title: Property and Party
+    subtitle: Properties, parcels, ownership interests, and participants
+    description: Property identity, parcels, legal descriptions, ownership interests, people, organizations, and contextual roles.
+  - key: underwriting_and_policy
+    title: Underwriting and Policy
+    subtitle: Decisions, commitments, policies, and endorsements
+    description: Underwriting authority and decisions, commitments, requirements, exceptions, owner and lender policies, endorsements, and coverage.
+  - key: settlement_and_escrow
+    title: Settlement and Escrow
+    subtitle: Closing, funds, reconciliation, and post-closing
+    description: Closing coordination, settlement statements, escrow accounting, funding, disbursement, reconciliation, and post-closing work.
+  - key: recording
+    title: Recording
+    subtitle: Preparation, submission, rejection, and confirmation
+    description: Recording packages, quality review, submission attempts, rejection, correction, acceptance, and official recording confirmation.
+  - key: agency
+    title: Agency
+    subtitle: Agent authority, reporting, remittance, and oversight
+    description: Independent title-agent appointments, delegated authority, policy reporting, premium remittance, exceptions, audits, and performance.
+  - key: claims
+    title: Claims
+    subtitle: Coverage, investigation, litigation, and financials
+    description: Claim notice, coverage evaluation, investigation, litigation, reserves, expenses, indemnity, recovery, subrogation, and closure.
+
+limitations:
+  - Discover sections are represented as source-controlled definitions but must currently be configured and published in the UI.
+  - The seven topic areas are not UC subdomains because UC supports only one subdomain level.

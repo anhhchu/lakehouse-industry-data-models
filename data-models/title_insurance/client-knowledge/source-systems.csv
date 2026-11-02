@@ -1,0 +1,12 @@
+system,role,authority,status,domains,source_id
+OrderHub,Title order intake and workflow,System of record,Current,title_order;party;property,GDRIVE-008
+TitlePlant,Public record indexes instruments and property evidence,System of record,Current,title_evidence;property,GDRIVE-008
+DocumentVault,Document images packages and retention,System of record,Current,title_evidence;settlement;recording;policy;claim,GDRIVE-008
+EscrowPro,Settlement statements escrow ledger and disbursements,System of record,Current,settlement;escrow;recording,GDRIVE-008
+PolicyAdmin,Commitments policies endorsements and premium,System of record,Current,underwriting;policy;billing_and_premium,GDRIVE-008
+AgencyPortal,Agent policy reporting and remittance,System of record,Current,agency;policy;billing_and_premium,GDRIVE-008
+ClaimsCase,Claims reserves payments expenses and recoveries,System of record,Current,claim,GDRIVE-008
+PartyMaster,Resolved people organizations and roles,Reference master,Current,party,GDRIVE-008
+BankFeed,Cleared banking transactions,External authority,Current,escrow,GDRIVE-008
+GeneralLedger,Financial accounting and close,System of record,Current,billing_and_premium;escrow;claim,GDRIVE-008
+LegacyArchive,Historical scanned files and policy images,Reference,Legacy,title_evidence;policy;claim,GDRIVE-008

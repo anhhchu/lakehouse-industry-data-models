@@ -542,6 +542,12 @@ def test_a_decimal_value_is_clamped_to_its_declared_precision(ns):
     assert coerce(999999, "DECIMAL(6,0)") == decimal.Decimal("999999")
 
 
+def test_a_decimal_38_value_has_sufficient_context_precision(ns):
+    coerce = ns["_coerce"]
+    value = coerce("9999999999999999999999999999.1234567890", "DECIMAL(38,10)")
+    assert value == decimal.Decimal("9999999999999999999999999999.1234567890")
+
+
 def test_a_percentage_stays_within_a_believable_range(ns):
     low, high, places = ns["numeric_range"]("completion_pct", "DOUBLE")
     assert (low, high) == (0.0, 100.0) and places == 2
@@ -765,3 +771,15 @@ def test_the_engine_imports_nothing_from_the_modelling_agent():
     allowed = {"datetime", "decimal", "json", "random", "re", "threading", "time",
                "concurrent.futures"}
     assert set(imports) <= allowed, set(imports) - allowed
+
+
+def test_production_sample_call_is_scoped_to_installed_schemas():
+    source = find_cell("def main()")
+    assert 'spark, cfg["sample"], installed_schemas(cfg, plan), log' in source
+
+
+def test_schema_reader_filters_columns_keys_and_foreign_keys():
+    source = ENGINE.read_text()
+    assert 'schema_filter = " AND c.table_schema IN (%s)"' in source
+    assert 'schema_filter.replace("c.table_schema", "k.table_schema")' in source
+    assert 'schema_filter.replace(" AND c.table_schema", " AND ck.table_schema")' in source

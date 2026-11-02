@@ -1,0 +1,2078 @@
+{
+  "run_name": "title_insurance_native_spark_layered",
+  "timeout_seconds": 7200,
+  "performance_target": "STANDARD",
+  "tasks": [
+    {
+      "task_key": "operations__title_order",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.title_order"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__order_channel"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "operations__party",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.party"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "operations__party_role",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.party_role"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__cpl_issuance"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "operations__title_search",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.title_search"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "recording__jurisdiction"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "operations__operations_title_examination",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.operations_title_examination"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__party"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "operations__order_status_history",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.order_status_history"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        },
+        {
+          "task_key": "underwriting__uw_referral"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "operations__operations_curative_action",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.operations_curative_action"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__operations_title_examination"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__easement_restriction"
+        },
+        {
+          "task_key": "property__encumbrance"
+        },
+        {
+          "task_key": "property__title_evidence"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        },
+        {
+          "task_key": "underwriting__title_finding"
+        },
+        {
+          "task_key": "underwriting__title_requirement"
+        },
+        {
+          "task_key": "underwriting__uw_referral"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "operations__order_channel",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.order_channel"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "operations__service_level",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "operations.service_level"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__order_channel"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "property__property",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.property"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "property__parcel",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.parcel"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "property__property"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "property__legal_description",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.legal_description"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "property__property"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "property__ownership_interest",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.ownership_interest"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "property__property"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "property__title_evidence",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.title_evidence"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "property__encumbrance",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.encumbrance"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "property__legal_description"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "property__title_evidence"
+        },
+        {
+          "task_key": "recording__recorded_instrument"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "property__easement_restriction",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.easement_restriction"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "property__title_evidence"
+        },
+        {
+          "task_key": "recording__recorded_instrument"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "property__tax_assessment",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.tax_assessment"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "property__property"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "property__lifecycle_event",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.lifecycle_event"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "claim__event"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__easement_restriction"
+        },
+        {
+          "task_key": "property__encumbrance"
+        },
+        {
+          "task_key": "property__legal_description"
+        },
+        {
+          "task_key": "property__ownership_interest"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "property__tax_assessment"
+        },
+        {
+          "task_key": "property__title_evidence"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "property__grantor_grantee_index",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "property.grantor_grantee_index"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "property__legal_description"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "recording__recorded_instrument"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__title_finding",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.title_finding"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__title_requirement",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.title_requirement"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__operations_title_examination"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "operations__title_search"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "underwriting__title_commitment"
+        },
+        {
+          "task_key": "underwriting__title_finding"
+        },
+        {
+          "task_key": "underwriting__uw_referral"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__policy_exception",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.policy_exception"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__title_commitment",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.title_commitment"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "property__property"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__title_policy",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.title_policy"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "property__property"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__endorsement",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.endorsement"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__uw_referral",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.uw_referral"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "property__property"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__curative_action",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.curative_action"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__operations_title_examination"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__title_evidence"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        },
+        {
+          "task_key": "underwriting__decision"
+        },
+        {
+          "task_key": "underwriting__title_finding"
+        },
+        {
+          "task_key": "underwriting__title_requirement"
+        },
+        {
+          "task_key": "underwriting__uw_referral"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__underwriting_title_examination",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.underwriting_title_examination"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "underwriting__decision",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "underwriting.decision"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__operations_title_examination"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "property__title_evidence"
+        },
+        {
+          "task_key": "underwriting__title_commitment"
+        },
+        {
+          "task_key": "underwriting__title_finding"
+        },
+        {
+          "task_key": "underwriting__uw_referral"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "settlement__closing_order",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.closing_order"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__agreement"
+        },
+        {
+          "task_key": "agency__cpl_issuance"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "settlement__escrow_ledger"
+        },
+        {
+          "task_key": "settlement__settlement_statement"
+        },
+        {
+          "task_key": "underwriting__title_commitment"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "settlement__settlement_statement",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.settlement_statement"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "settlement__escrow_ledger",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.escrow_ledger"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__cpl_issuance"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "settlement__settlement_statement"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "settlement__disbursement",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.disbursement"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__party_role"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "settlement__escrow_ledger"
+        },
+        {
+          "task_key": "settlement__settlement_statement"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "settlement__wire_instruction",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.wire_instruction"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "settlement__closing_order"
+        },
+        {
+          "task_key": "settlement__disbursement"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "settlement__premium_charge",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.premium_charge"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__premium_split_schedule"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "settlement__settlement_statement"
+        },
+        {
+          "task_key": "underwriting__endorsement"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "settlement__closing_document",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.closing_document"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__legal_description"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        },
+        {
+          "task_key": "settlement__closing_order"
+        },
+        {
+          "task_key": "settlement__settlement_statement"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "settlement__escrow_reconciliation",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.escrow_reconciliation"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "settlement__escrow_ledger"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "settlement__escrow_receipt",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "settlement.escrow_receipt"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__party_role"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "settlement__escrow_ledger"
+        },
+        {
+          "task_key": "settlement__settlement_statement"
+        },
+        {
+          "task_key": "settlement__wire_instruction"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "recording__recording_submission",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.recording_submission"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "recording__jurisdiction"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "recording__recorded_instrument",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.recorded_instrument"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "recording__submission_document",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.submission_document"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "recording__gateway_transaction"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "recording__rejection_event",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.rejection_event"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__operations_curative_action"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "recording__gateway_transaction"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        },
+        {
+          "task_key": "recording__submission_document"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "recording__gap_coverage_period",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.gap_coverage_period"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        },
+        {
+          "task_key": "underwriting__title_commitment"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        },
+        {
+          "task_key": "underwriting__uw_referral"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "recording__fee",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.fee"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "recording__jurisdiction"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "recording__jurisdiction",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.jurisdiction"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "recording__submission_status_history",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.submission_status_history"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "recording__gateway_transaction"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        },
+        {
+          "task_key": "recording__submission_document"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "recording__gateway_transaction",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "recording.gateway_transaction"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "operations__party"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__agent_authority",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.agent_authority"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__agreement"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__agent_license",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.agent_license"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__agent_profile",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.agent_profile"
+        }
+      },
+      "environment_key": "default"
+    },
+    {
+      "task_key": "agency__agreement",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.agreement"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__party"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__eo_coverage",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.eo_coverage"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__agreement"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__premium_split_schedule",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.premium_split_schedule"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__agreement"
+        },
+        {
+          "task_key": "operations__party"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__cpl_issuance",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.cpl_issuance"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__agreement"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__legal_description"
+        },
+        {
+          "task_key": "property__ownership_interest"
+        },
+        {
+          "task_key": "property__parcel"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__oversight_review",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.oversight_review"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__agreement"
+        },
+        {
+          "task_key": "operations__title_order"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__agent_remittance",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.agent_remittance"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__agreement"
+        },
+        {
+          "task_key": "agency__premium_split_schedule"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "agency__remittance_line",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "agency.remittance_line"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "agency__agent_remittance"
+        },
+        {
+          "task_key": "agency__agreement"
+        },
+        {
+          "task_key": "agency__premium_split_schedule"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "property__property"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__title_claim",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.title_claim"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "property__property"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__event",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.event"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__reserve",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.reserve"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__loss_payment",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.loss_payment"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "claim__recovery_receipt"
+        },
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "settlement__disbursement"
+        },
+        {
+          "task_key": "underwriting__curative_action"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__recovery_receipt",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.recovery_receipt"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__investigation",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.investigation"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "agency__agent_profile"
+        },
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "operations__title_order"
+        },
+        {
+          "task_key": "property__legal_description"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "recording__recorded_instrument"
+        },
+        {
+          "task_key": "underwriting__title_commitment"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        },
+        {
+          "task_key": "underwriting__underwriting_title_examination"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__claim_curative_action",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.claim_curative_action"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "property__easement_restriction"
+        },
+        {
+          "task_key": "property__encumbrance"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "recording__recording_submission"
+        },
+        {
+          "task_key": "settlement__closing_document"
+        },
+        {
+          "task_key": "underwriting__curative_action"
+        },
+        {
+          "task_key": "underwriting__title_finding"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        },
+        {
+          "task_key": "underwriting__title_requirement"
+        },
+        {
+          "task_key": "underwriting__underwriting_title_examination"
+        },
+        {
+          "task_key": "underwriting__uw_referral"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__claim_party",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.claim_party"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__regulatory_loss_report",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.regulatory_loss_report"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "claim__coverage_decision",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/anhhoang.chu@databricks.com/title_insurance/synthetic/generate_synthetic_data_job",
+        "source": "WORKSPACE",
+        "base_parameters": {
+          "catalog": "serverless_stable_dvmvgw_catalog",
+          "model_path": "/Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm/model.json",
+          "order_count": "10000",
+          "months": "24",
+          "seed": "20261102",
+          "table_key": "claim.coverage_decision"
+        }
+      },
+      "environment_key": "default",
+      "depends_on": [
+        {
+          "task_key": "claim__investigation"
+        },
+        {
+          "task_key": "claim__title_claim"
+        },
+        {
+          "task_key": "operations__party"
+        },
+        {
+          "task_key": "property__parcel"
+        },
+        {
+          "task_key": "recording__recorded_instrument"
+        },
+        {
+          "task_key": "underwriting__curative_action"
+        },
+        {
+          "task_key": "underwriting__title_commitment"
+        },
+        {
+          "task_key": "underwriting__title_finding"
+        },
+        {
+          "task_key": "underwriting__title_policy"
+        },
+        {
+          "task_key": "underwriting__underwriting_title_examination"
+        },
+        {
+          "task_key": "underwriting__uw_referral"
+        }
+      ],
+      "run_if": "ALL_SUCCESS"
+    }
+  ],
+  "environments": [
+    {
+      "environment_key": "default",
+      "spec": {
+        "environment_version": "4",
+        "dependencies": []
+      }
+    }
+  ]
+}

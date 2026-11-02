@@ -1,0 +1,31 @@
+workspace:
+  profile: DEFAULT
+  host: https://fevm-serverless-stable-dvmvgw.cloud.databricks.com
+
+unity_catalog:
+  catalog: serverless_stable_dvmvgw_catalog
+  generated_schema_prefix: ti_
+  metamodel_schema: _metamodel
+  artifact_volume: serverless_stable_dvmvgw_catalog._metamodel.vol_root
+
+sql:
+  warehouse_id: e97542bc3b72cb1b
+  warehouse_name: Serverless Starter Warehouse
+
+uc_semantics:
+  parent_domain_id: 67536dad-1b1d-4703-82ba-a16ff4910fdd
+  parent_tag_key: Insurance
+  subdomain_id: fc05a63b-5d24-4e93-80cd-d492b1b7a226
+  subdomain_tag_key: Insurance/Title Insurance
+  publish_subdomain: false
+
+deployment:
+  run_type: Install Existing Model
+  source_model_path: /Volumes/serverless_stable_dvmvgw_catalog/_metamodel/vol_root/business/title_insurance/v1/mvm
+  create_catalog: false
+  deploy_model_objects: true
+  create_metric_views: true
+  generate_samples: true
+  sample_rows: 10
+  create_genie_agents: false
+  publish_pages: false

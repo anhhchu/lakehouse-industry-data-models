@@ -1,0 +1,17 @@
+term,synonyms,definition,distinct_from,source_id
+title_order,order;file,"A request for title or settlement services for a transaction",title_policy,GDRIVE-002
+title_search,search;search package,"The collection of title evidence from defined sources",title_examination,GDRIVE-002
+title_examination,examination;exam,"Professional evaluation of title evidence and apparent title condition",title_search,GDRIVE-003
+chain_of_title,ownership history;title chain,"The chronological sequence of ownership interests affecting property",current owner,GDRIVE-003
+title_finding,finding,"An examiner conclusion supported by title evidence",recorded instrument,GDRIVE-003
+requirement,condition,"A condition to satisfy, waive, or disposition before closing or issuance",exception,GDRIVE-003
+exception,exclusion,"A matter excluded from proposed or issued coverage",requirement,GDRIVE-003
+curative_action,curative work,"An action intended to resolve or address a title finding",underwriting decision,GDRIVE-003
+title_commitment,commitment;preliminary report,"A conditional offer to issue title insurance",title_policy,GDRIVE-002
+title_policy,policy,"The issued contract of title insurance",title_commitment,GDRIVE-005
+settlement_statement,closing statement,"A presentation of transaction charges, credits, and funds",escrow ledger,GDRIVE-004
+escrow_ledger,trust ledger,"The accounting record of actual escrow receipts and disbursements",settlement statement,GDRIVE-004
+recorded_instrument,recorded document,"A document accepted into a recording jurisdiction's official records",title finding,GDRIVE-003
+recording_package,recording submission,"A set of documents submitted together for recording",recorded instrument,GDRIVE-004
+endorsement,policy endorsement,"A form that modifies or clarifies policy coverage",policy exception,GDRIVE-005
+claim,notice of claim,"A demand for coverage or performance under a title policy",title finding,GDRIVE-005

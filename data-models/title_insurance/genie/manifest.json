@@ -1,0 +1,30 @@
+[
+  {
+    "agent_key": "title_operations",
+    "title": "Title Insurance Operations",
+    "request_file": "data-models/title_insurance/genie/title_operations.create.json",
+    "metric_view_count": 6,
+    "benchmark_mode": "agent"
+  },
+  {
+    "agent_key": "settlement_escrow",
+    "title": "Title Insurance Settlement & Escrow",
+    "request_file": "data-models/title_insurance/genie/settlement_escrow.create.json",
+    "metric_view_count": 6,
+    "benchmark_mode": "agent"
+  },
+  {
+    "agent_key": "underwriting_policy",
+    "title": "Title Insurance Underwriting & Policy",
+    "request_file": "data-models/title_insurance/genie/underwriting_policy.create.json",
+    "metric_view_count": 8,
+    "benchmark_mode": "agent"
+  },
+  {
+    "agent_key": "claims",
+    "title": "Title Insurance Claims",
+    "request_file": "data-models/title_insurance/genie/claims.create.json",
+    "metric_view_count": 6,
+    "benchmark_mode": "agent"
+  }
+]

@@ -1,0 +1,84 @@
+version: 1
+status: proposed
+source_id: GDRIVE-007
+
+metrics:
+  - name: title_order_count
+    definition: Count of distinct title orders opened in the reporting period.
+    grain: title_order
+    aggregation: count_distinct
+    dimensions:
+      - opened_date
+      - transaction_purpose
+      - channel
+      - jurisdiction
+      - branch
+      - agent
+
+  - name: commitment_cycle_days
+    definition: Calendar days from order opening to first commitment issuance.
+    grain: title_order
+    start_event: order_opened
+    end_event: first_commitment_issued
+    exclusions:
+      - cancelled_before_search
+    dimensions:
+      - opened_date
+      - transaction_purpose
+      - jurisdiction
+      - branch
+      - agent
+
+  - name: open_requirement_count
+    definition: Count of requirements not satisfied, waived, withdrawn, or superseded as of the observation timestamp.
+    grain: title_requirement
+    aggregation: count
+    dimensions:
+      - requirement_category
+      - aging_band
+      - jurisdiction
+      - responsible_team
+
+  - name: recording_rejection_rate
+    definition: Recording submissions with at least one rejection divided by recording submissions receiving a disposition.
+    grain: recording_submission
+    numerator: rejected_submission_count
+    denominator: dispositioned_submission_count
+    dimensions:
+      - jurisdiction
+      - submission_method
+      - rejection_reason
+
+  - name: escrow_out_of_balance_amount
+    definition: Receipts minus disbursements minus remaining ledger balance after approved adjustments.
+    grain: escrow_file
+    expected_value: 0
+    classification: confidential
+    dimensions:
+      - accounting_date
+      - branch
+      - aging_band
+
+  - name: policy_issuance_cycle_days
+    definition: Calendar days from recording confirmation to first final policy issuance.
+    grain: policy
+    start_event: recording_confirmed
+    end_event: policy_issued
+    dimensions:
+      - policy_type
+      - jurisdiction
+      - branch
+      - agent
+
+  - name: claim_severity
+    definition: Incurred claim amount divided by distinct claims for the selected reporting cell.
+    grain: claim
+    numerator: incurred_claim_amount
+    denominator: distinct_claim_count
+    dimensions:
+      - loss_date
+      - policy_type
+      - defect_category
+      - jurisdiction
+      - agent
+

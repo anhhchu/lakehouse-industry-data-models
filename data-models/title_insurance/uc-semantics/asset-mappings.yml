@@ -1,0 +1,67 @@
+version: 3
+status: draft
+
+domain_mapping:
+  parent_domain: Insurance
+  subdomain: Title Insurance
+  governed_tag: Insurance/Title Insurance
+
+mapping_rules:
+  - rule: Apply the existing Insurance/Title Insurance governed tag to all approved project assets.
+  - rule: Use topic to organize assets within the Title Insurance subdomain without creating more governed tags.
+  - rule: Configure topic groupings as Discover sections or Page collections in the UI.
+
+asset_mappings:
+  - asset_pattern: ${catalog}.ti_operations.*
+    asset_type: schema_children
+    topic: title_operations
+  - asset_pattern: ${catalog}.ti_property.*
+    asset_type: schema_children
+    topic: property_and_party
+  - asset_pattern: ${catalog}.ti_underwriting.*
+    asset_type: schema_children
+    topic: underwriting_and_policy
+  - asset_pattern: ${catalog}.ti_settlement.*
+    asset_type: schema_children
+    topic: settlement_and_escrow
+  - asset_pattern: ${catalog}.ti_recording.*
+    asset_type: schema_children
+    topic: recording
+  - asset_pattern: ${catalog}.ti_agency.*
+    asset_type: schema_children
+    topic: agency
+  - asset_pattern: ${catalog}.ti_claim.*
+    asset_type: schema_children
+    topic: claims
+metric_view_mappings:
+  - metric_view_pattern: ${catalog}._metrics.operations_*
+    topic: title_operations
+  - metric_view_pattern: ${catalog}._metrics.property_*
+    topic: property_and_party
+  - metric_view_pattern: ${catalog}._metrics.underwriting_*
+    topic: underwriting_and_policy
+  - metric_view_pattern: ${catalog}._metrics.settlement_*
+    topic: settlement_and_escrow
+  - metric_view_pattern: ${catalog}._metrics.recording_*
+    topic: recording
+  - metric_view_pattern: ${catalog}._metrics.agency_*
+    topic: agency
+  - metric_view_pattern: ${catalog}._metrics.claim_*
+    topic: claims
+
+workspace_asset_mappings:
+  - asset_name: ${title_operations_genie_agent}
+    asset_type: genie_agent
+    topic: title_operations
+  - asset_name: ${settlement_and_escrow_genie_agent}
+    asset_type: genie_agent
+    topic: settlement_and_escrow
+  - asset_name: ${underwriting_and_policy_genie_agent}
+    asset_type: genie_agent
+    topic: underwriting_and_policy
+  - asset_name: ${claims_genie_agent}
+    asset_type: genie_agent
+    topic: claims
+
+applied_governed_tags:
+  - Insurance/Title Insurance
