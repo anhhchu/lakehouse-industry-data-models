@@ -7,9 +7,6 @@ owner: ${underwriting_owner}
 synonyms:
   - commitment
   - preliminary report
-source_ids:
-  - GDRIVE-002
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_underwriting.title_commitment
   - ${catalog}.ti_underwriting.title_requirement

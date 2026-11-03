@@ -7,9 +7,6 @@ owner: ${title_operations_owner}
 synonyms:
   - requirement
   - condition
-source_ids:
-  - GDRIVE-003
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_underwriting.title_requirement
   - ${catalog}.ti_underwriting.title_finding

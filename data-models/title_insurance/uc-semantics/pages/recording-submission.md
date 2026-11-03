@@ -7,9 +7,6 @@ owner: ${recording_operations_owner}
 synonyms:
   - recording attempt
   - e-recording submission
-source_ids:
-  - GDRIVE-002
-  - GDRIVE-004
 related_assets:
   - ${catalog}.ti_recording.submission_document
   - ${catalog}.ti_recording.recording_submission

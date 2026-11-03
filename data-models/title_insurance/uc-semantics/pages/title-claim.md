@@ -7,9 +7,6 @@ owner: ${claims_owner}
 synonyms:
   - claim
   - notice of claim
-source_ids:
-  - GDRIVE-005
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_claim.title_claim
   - ${catalog}.ti_claim.coverage_decision

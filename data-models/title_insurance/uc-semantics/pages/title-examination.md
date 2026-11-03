@@ -7,10 +7,6 @@ owner: ${title_operations_owner}
 synonyms:
   - examination
   - title exam
-source_ids:
-  - GDRIVE-002
-  - GDRIVE-003
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_operations.operations_title_examination
   - ${catalog}.ti_underwriting.title_finding

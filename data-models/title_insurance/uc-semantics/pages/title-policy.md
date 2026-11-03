@@ -6,9 +6,6 @@ topic: underwriting_and_policy
 owner: ${policy_administration_owner}
 synonyms:
   - policy
-source_ids:
-  - GDRIVE-005
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_underwriting.title_policy
   - ${catalog}.ti_underwriting.endorsement

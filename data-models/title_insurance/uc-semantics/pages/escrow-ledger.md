@@ -7,10 +7,6 @@ owner: ${settlement_operations_owner}
 synonyms:
   - trust ledger
   - escrow accounting ledger
-source_ids:
-  - GDRIVE-004
-  - GDRIVE-006
-  - GDRIVE-007
 related_assets:
   - ${catalog}.ti_settlement.escrow_ledger
   - ${catalog}.ti_settlement.escrow_reconciliation

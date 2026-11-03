@@ -7,9 +7,6 @@ owner: ${underwriting_owner}
 synonyms:
   - exception
   - exclusion
-source_ids:
-  - GDRIVE-003
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_underwriting.policy_exception
   - ${catalog}.ti_underwriting.title_commitment

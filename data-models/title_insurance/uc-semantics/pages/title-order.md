@@ -7,9 +7,6 @@ owner: ${title_operations_owner}
 synonyms:
   - order
   - title file
-source_ids:
-  - GDRIVE-002
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_operations.title_order
   - ${catalog}.ti_operations.order_status_history

@@ -6,8 +6,6 @@ topic: settlement_and_escrow
 owner: ${settlement_operations_owner}
 synonyms:
   - settlement
-source_ids:
-  - GDRIVE-004
 related_assets:
   - ${catalog}.ti_settlement.closing_order
   - ${catalog}.ti_settlement.settlement_statement

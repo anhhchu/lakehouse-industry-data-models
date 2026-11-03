@@ -7,9 +7,6 @@ owner: ${data_governance_owner}
 synonyms:
   - real property
   - tax parcel
-source_ids:
-  - GDRIVE-002
-  - GDRIVE-003
 related_assets:
   - ${catalog}.ti_property.property
   - ${catalog}.ti_property.parcel

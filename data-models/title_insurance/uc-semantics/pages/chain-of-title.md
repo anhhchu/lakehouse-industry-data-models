@@ -6,9 +6,6 @@ topic: property_and_party
 owner: ${title_operations_owner}
 synonyms:
   - ownership history
-source_ids:
-  - GDRIVE-003
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_property.ownership_interest
   - ${catalog}.ti_recording.recorded_instrument

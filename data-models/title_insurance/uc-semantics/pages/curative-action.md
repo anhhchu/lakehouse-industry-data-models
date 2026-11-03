@@ -7,9 +7,6 @@ owner: ${title_operations_owner}
 synonyms:
   - curative work
   - cure
-source_ids:
-  - GDRIVE-003
-  - GDRIVE-006
 related_assets:
   - ${catalog}.ti_underwriting.curative_action
   - ${catalog}.ti_underwriting.title_finding
